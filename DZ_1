@@ -1,0 +1,198 @@
+#Задача 1
+def sum():
+    n=1000000
+    pair = 1+n
+    col = n/2
+    return[col*pair]
+print(sum())
+
+
+#Задача 2
+def TwoSum(nums, target):
+    left = 0
+    right = len(nums)-1
+
+    while (left<right):
+        sum = nums[left]+nums[right]
+
+        if sum==target:
+            return[left, right]
+        elif sum<target:
+            left+=1
+        else:
+            right-=1
+    return[]
+
+num=[3, 8, 9, 11, 16, 18, 19, 21]
+target=25
+print(TwoSum(num,target))
+
+
+#Задача 3
+def reverseArray1(arr):
+    arr.reverse()
+    return arr
+
+def reverseArray2(arr):
+    left = 0
+    right = len(arr)-1
+    while left < right:
+        arr[left], arr[right] = arr[right], arr[left]
+        left+=1
+        right-=1
+    return arr
+
+
+#Задача 4
+def reverseArray(arr, left, right):
+    while left<right:
+        arr[left], arr[right] = arr[right], arr[left]
+        left+=1
+        right-=1
+    return arr
+
+def solution(arr, k):
+    n = len(arr)
+    if n==0:
+        return arr
+    k %= n
+    if k == 0:
+        return arr
+    reverseArray(arr,0, n-1)
+    reverseArray(arr, 0, k - 1)
+    reverseArray(arr, k, n - 1)
+    return arr
+
+
+def solution2(arr, k):
+    n = len(arr)
+    if n == 0:
+        return arr
+    k %= n
+    if k == 0:
+        return arr
+    arr.reverse()
+    arr[:k] = arr[:k][::-1]
+    arr[k:] = arr[k:][::-1]
+    return arr
+
+
+#Задача 5
+def merge_sorted_arrays(arr1, arr2):
+    merged_array = []
+    i=0
+    j=0
+    while i<len(arr1) and j<len(arr2):
+        if arr1[i]<arr2[j]:
+            merged_array.append(arr1[i])
+            i += 1
+        else:
+            merged_array.append(arr2[j])
+            j += 1
+    merged_array.extend(arr1[i:])
+    merged_array.extend(arr2[j:])
+    return merged_array
+
+
+#Задача 6
+def merge(arr1, arr2):
+    p1 = len(arr1)-len(arr2)-1
+    p2 = len(arr2)-1
+    p3 = len(arr1)-1
+
+    while p2>=0:
+        if p1>=0 and arr1[p1]>arr2[p2]:
+            arr1[p3]=arr1[p1]
+            p1-=1
+        else:
+            arr1[p3]=arr2[p2]
+            p2-=1
+        p3-=1
+    return arr1
+
+
+#Задача 7
+def minSubArray(nums, target):
+    minLen = float('inf')
+    left = 0
+    curSum = 0
+    for right in range(0,len(nums),1):
+        curSum += nums[right]
+
+        while curSum >= target:
+            windowSize = right - left + 1
+            if windowSize < minLen:
+                minLen = windowSize
+            curSum -= nums[left]
+            left+=1
+    return minLen if minLen != float('inf') else 0
+
+
+#Задача 8
+def sort_binary_array(arr):
+    left = 0
+    right = len(arr)-1
+
+    while left < right:
+        if arr[left] == 0:
+            left += 1
+        elif arr[right]:
+            right -= 1
+        else:
+            arr[left], arr[right] = arr[right], arr[left]
+            left += 1
+            right -= 1
+
+    return arr
+
+
+def sort_binary_array2(arr):
+    left = 0
+    right = len(arr) - 1
+
+    while left < right:
+        if arr[left] == 1:
+            arr[left], arr[right] = arr[right], arr[left]
+            right -= 1
+        else:
+            left += 1
+
+    return arr
+
+
+#Задача 9
+def sort_colors(nums):
+    l = 0
+    m = 0
+    h = len(nums)-1
+    while(m <= h):
+        if nums[m] == 0:
+            nums[l], nums[m] = nums[m], nums[l]
+            l+=1
+            m+=1
+        elif nums[m] == 1:
+            m+=1
+        else:
+            nums[h], nums[m] = nums[m], nums[h]
+            h-=1
+    return nums
+
+
+#Задача 10
+def even_first(arr):
+    index = 0
+    for i in range(0,len(arr)-1,1):
+        if arr[i] % 2 == 0:
+            arr[i], arr[index] = arr[index], arr[i]
+            index += 1
+    return arr
+
+
+#Задача 11
+def null_end(arr):
+    index = len(arr)-1
+    for i in range(len(arr)-1,0,-1):
+        if arr[i]  == 0:
+            arr[i], arr[index] = arr[index], arr[i]
+            index -= 1
+    return arr
