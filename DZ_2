@@ -1,0 +1,181 @@
+# ЗАДАЧА 1
+def hesCycle(head):
+    if head == None or head.next == None:
+        return 'false'
+    slow = head
+    fast = head.next
+
+    while slow != fast:
+        if fast == None or fast.next == None:
+            return 'false'
+        slow = slow.next
+        fast = fast.next.next
+
+    return 'true'
+
+
+
+# ЗАДАЧА 2
+def reverseLinkedList(head):
+    prev = None
+    current = head
+
+    while current != None:
+        next = current.next
+        current.next = prev
+        prev = current
+        current = next
+
+    head = prev
+    return head
+
+
+
+# ЗАДАЧА 3
+def middle_node(head):
+    slow = fast = head
+
+    while fast != None and fast.next != None:
+        slow = slow.next
+        fast = fast.next.next
+    
+    return slow
+
+
+
+# ЗАДАЧА 4
+class ListNode:
+    def __init__(self,val):
+        self.val = val
+        self.next = None
+
+def remove_elements(head, value):
+    dummy = ListNode()
+    dummy.next = head
+    prev = dummy
+    current = head
+
+    while current != None:
+        if current.val == value:
+            prev.next = current.next
+        else:
+            prev = current
+        current = current.next
+
+    return dummy.next
+
+
+# ЗАДАЧА 5
+class ListNode:
+    def __init__(self,val):
+        self.val = val
+        self.next = None
+
+
+def remove_from_end(head,n):
+    dummy = ListNode(0, head)
+    slow = dummy
+    fast = dummy
+
+    for i in range(0,n,1):
+        fast = fast.next
+
+    while fast != None:
+        slow = slow.next
+        fast = fast.next
+
+    slow.next = slow.next.next
+
+    return dummy.next
+
+
+# ЗАДАЧА 6
+from collections import deque
+
+def is_subsequence(a,b):
+    q = deque()
+    for el in a:
+        q.append(el)
+
+    for el in b:
+        if q and q[0] == el:
+            q.popleft()
+
+    return len(q) == 0
+
+def is_subsequence2(a,b):
+    i,j = 0,0
+    while i < len(a) and j < len(b):
+        if a[i] == b[j]:
+            i += 1
+        j += 1
+    return i == len(a)
+
+
+# ЗАДАЧА 7
+def is_palindrome(s):
+    stack = []
+    for char in s:
+        stack.append(char)
+
+    for char in s:
+        if char != stack.pop():
+            return 'false'
+
+    return 'true'
+
+
+def is_palindrome2(s):
+    left = 0
+    right = len(s) - 1
+
+    while left<right:
+        if s[left] != s[right]:
+            return 'false'
+        left += 1
+        right -= 1
+
+    return 'true'
+
+
+# ЗАДАЧА 8
+def sort_array(input):
+    stack = []
+
+    while len(input) > 0:
+        current = input.pop()
+
+        while stack and stack[-1] > current:
+            input.append(stack.pop())
+
+        stack.append(current)
+
+    return stack
+
+
+# ЗАДАЧА 9
+class ListNode:
+    def __init__(self,val):
+        self.val = val
+        self.next = None
+
+
+def sum_array2(a,b):
+    node = ListNode(0)
+    result = node
+
+    while a and b:
+        if a.val <= b.val:
+            result.next = a
+            a=a.next
+            result = result.next
+        else:
+            result.next = b
+            b=b.next
+            result = result.next
+    if a == None:
+        result.next = b
+    else:
+        result.next = a
+
+    return node.next
