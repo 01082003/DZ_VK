@@ -23,10 +23,6 @@ def TwoSum(nums, target):
             right-=1
     return[]
 
-num=[3, 8, 9, 11, 16, 18, 19, 21]
-target=25
-print(TwoSum(num,target))
-
 
 #Задача 3
 def reverseArray1(arr):
