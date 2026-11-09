@@ -1,0 +1,101 @@
+# ЗАДАЧА 1
+def sqrt(target):
+    if target<0:
+        return 0
+    l, r = 0,target
+    while l <= r:
+        mid = (l+r)//2
+        if mid**2 == target:
+            return mid
+        elif mid**2 < target:
+            l = mid + 1
+        else:
+            r = mid - 1
+    return r
+
+p=int(input())
+print(sqrt(p))
+
+
+# ЗАДАЧА 2
+def kserox(n, x, y):
+    first=min(x,y)
+    l, r = 0, (n-1)*min(x,y)
+    while l <= r:
+        mid = (l+r)//2
+        if mid//x+mid//y == n-1:
+            return mid+first
+        elif mid//x+mid//y < n-1:
+            l = mid+1
+        else:
+            r = mid-1
+    return l-1+first
+
+
+n = int(input())
+x = int(input())
+y = int(input())
+
+print(kserox(n, x, y))
+
+
+# ЗАДАЧА 3
+def korm(animals, food):
+    if len(animals) == 0 or len(food) == 0:
+        return 0
+    animals.sort()
+    food.sort()
+
+    count = 0
+    for f in food:
+        if len(animals) > count:
+            if f>=animals[count]:
+                count += 1
+
+        if count == len(animals):
+            break
+
+    return count
+
+
+# ЗАДАЧА 4
+def difference(a,b):
+    heshmapb = {}
+    for i in b:
+        heshmapb[i] = heshmapb.get(i,0) + 1
+
+    for j in a:
+        heshmapb[j] = heshmapb.get(j,0) - 1
+
+    for letter, count in heshmapb.items():
+        if count>0:
+            return letter
+    return''
+
+print(difference('asdfghjk','kjasdhgfa'))
+
+
+
+# ЗАДАЧА 5
+def summa(a, target):
+    heshmapb = {}
+    for i in a:
+        heshmapb[i] = heshmapb.get(i, 0)+1
+    for i in a:
+        razn = target - i
+        if heshmapb.get(razn, 0) > 0  and (razn != i or heshmapb.get(razn, 0) > 1):
+            return i, razn
+
+    return None
+
+
+
+# ЗАДАЧА 6
+def annograms(strs):
+    slova = {}
+    for s in strs:
+        summ = 1
+        for letter in s:
+            summ = summ * ((ord(letter)+5)%131)
+        slova.setdefault(summ, []).append(s)
+    return list(slova.values())
