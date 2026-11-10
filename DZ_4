@@ -1,0 +1,33 @@
+# ЗАДАЧА 1
+class Nodes:
+    def __init__(self, val, left=None, right=None):
+        self.data = val
+        self.left = left
+        self.right = right
+
+
+def build_tree(arr,i):
+    if i >= len(arr) or arr[i] is None:
+        return None
+
+    root = Nodes(arr[i])
+    root.left = build_tree (arr, 2*i+1)
+    root.right = build_tree (arr, 2*i+2)
+    return root
+
+# на вход подается массив, на выходе получаем связанный список
+# предполагается что в массиве элементы расположены так, как
+# если бы мы обходили дерево вширину
+
+# ЗАДАЧА 2
+
+
+# ЗАДАЧА 3
+
+
+# ЗАДАЧА 4
+
+
+# ЗАДАЧА 5
+
+
