@@ -106,6 +106,8 @@ def merge(arr1, arr2):
         p3-=1
     return arr1
 
+# Т к два исходных массива отсортированы, то в конец массива всегда идет наибольший элемент из оставшихся
+
 
 #Задача 7
 def minSubArray(nums, target):
@@ -155,6 +157,7 @@ def sort_binary_array2(arr):
 
     return arr
 
+# Решение имеет линейную сложность т к мы просто проходимся по массиву с двух сторон и заменяем значения 
 
 #Задача 9
 def sort_colors(nums):
@@ -173,6 +176,7 @@ def sort_colors(nums):
             h-=1
     return nums
 
+# Каждый из указателей находится на границе 0,1 и 2, при этом если элемент не соответсвует требуемому значению происходит замена и сдвиг указателя
 
 #Задача 10
 def even_first(arr):
@@ -183,12 +187,18 @@ def even_first(arr):
             index += 1
     return arr
 
+# Сохранение порядка обеспечивается законом перемещения второго указателя
 
 #Задача 11
 def null_end(arr):
-    index = len(arr)-1
-    for i in range(len(arr)-1,0,-1):
-        if arr[i]  == 0:
-            arr[i], arr[index] = arr[index], arr[i]
-            index -= 1
+    index = 0
+    for i in range(len(arr)):
+        if arr[i]  != 0:
+            arr[index] = arr[i]
+            index += 1
+    while index < len(arr):
+        arr[index] = 0
+        index += 1
     return arr
+
+# Здесь также выполняется проход по массиву с заменой переменных
