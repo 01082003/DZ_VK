@@ -177,7 +177,7 @@ def sort_colors(nums):
 #Задача 10
 def even_first(arr):
     index = 0
-    for i in range(0,len(arr)-1,1):
+    for i in range(0,len(arr),1):
         if arr[i] % 2 == 0:
             arr[i], arr[index] = arr[index], arr[i]
             index += 1
