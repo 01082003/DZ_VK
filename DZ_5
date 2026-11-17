@@ -1,0 +1,111 @@
+ # ЗАДАЧА 1
+def is_complete(root):
+    if root is None:
+        return True
+
+    queue = [root]
+    seen_none = False
+
+    while (len(queue) > 0):
+        node = queue.pop(0)
+
+        if node is None:
+            seen_none = True
+        else:
+            if seen_none:
+                return False
+
+            queue.append(node.left)
+            queue.append(node.right)
+
+    return True
+
+# обход в ширину выбран, т к необходимо чтобы были заполнены все ряды кроме разве что последнего,
+# на последнем уровне должны быть заполненыйы более левые ячейки
+
+ # ЗАДАЧА 2
+def merge_sorted_arrays(sorted_arrays):
+
+    merged = []
+
+    min_heap = MinHeap()
+
+    for i in range(len(sorted_arrays)):
+        current_array = sorted_arrays[i]
+
+        if len(current_array) > 0 :
+            min_heap.heappush([current_array[0],i,0])
+
+    while not min_heap.empty():
+        val, arr_ind, el_ind = min_heap.heappop()
+        merged.append(val)
+
+        if (el_ind + 1 < len(sorted_arrays[arr_ind])):
+            next_el = sorted_arrays[arr_ind][el_ind + 1]
+            min_heap.heappush([next_el,arr_ind,el_ind+1])
+
+    return merged
+
+# сложность алгоритма: добавление К элементов -- О(К);
+# извлечение наименьшего элемента из кучи и добавление следущего элемента -- О(logК);
+# Суммарная сложность: О(К+Nlog(k))
+
+ # ЗАДАЧА 3
+def k_min(arr, k):
+
+    if k > len(arr) or k<=0:
+        return None
+    max_heap = MaxHeap()
+
+    for i in range(len(arr)):
+        max_heap.heappush(arr[i])
+
+        if i>=k:
+            max_heap.heappop()
+
+    return max_heap[0]
+
+
+ # ЗАДАЧА 4
+def inorder_min_iterative(node, k):
+    stack = []
+    counter = 0
+    current = node
+    while len(stack) > 0 or current != None:
+        while current != None:
+            stack.append(current)
+            current = current.left
+
+        current = stack.pop()
+        counter += 1
+        if counter == k:
+            return current.val
+
+        current = current.right
+
+    return None
+
+ # ЗАДАЧА 5
+def balans_factor(node):
+    if node is None:
+        return 0
+    left_h = balans_factor(node.left)
+    right_h = balans_factor(node.right)
+
+    node.balancefactor = left_h - right_h
+    return 1+max(left_h, right_h)
+
+ # ЗАДАЧА 6
+def mirror(node):
+    if node is None:
+        return None
+
+    node.left, node.right = node.right, node.left
+
+    mirror(node.left)
+    mirror(node.right)
+
+    return node
+
+# Поочереди зеркалим все части дереваб временная сложность O(n)
+
